@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import ConnectModal from "./components/ConnectModal";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
 import Faucet from "./pages/Faucet";
-import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 
 function App() {
@@ -33,7 +33,12 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/faucet" element={<Faucet wallet={wallet} />} />
+        <Route
+          path="/faucet"
+          element={
+            <Faucet wallet={wallet} showConnectModal={showConnectModal} />
+          }
+        />
       </Routes>
     </div>
   );
