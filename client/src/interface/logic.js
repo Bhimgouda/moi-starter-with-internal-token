@@ -1,7 +1,7 @@
 import { VoyageProvider, Wallet, getLogicDriver } from "js-moi-sdk";
 
 const provider = new VoyageProvider("babylon");
-const logicId = process.env.REACT_APP_LOGIC_ID;
+export const logicId = process.env.REACT_APP_LOGIC_ID;
 
 const constructBaseWallet = async () => {
   const wallet = new Wallet(provider);
@@ -42,6 +42,8 @@ const GetTokenClaimAmount = async () => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
   return logicDriver.routines.ClaimAmount();
 };
+
+// returns a unix timestamp in seconds
 const GetNextClaim = async (account) => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
   return logicDriver.routines.NextClaim(account);
@@ -50,6 +52,8 @@ const GetTokenDecimals = async () => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
   return logicDriver.routines.Decimals();
 };
+
+// get the decimal value / precision of the token
 const GetTokenSymbol = async () => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
   return logicDriver.routines.Symbol();

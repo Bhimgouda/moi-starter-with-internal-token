@@ -310,3 +310,14 @@ header {
     height: 60px;
   }
 }
+
+
+.connect-wallet {
+  display: grid;
+  place-items: center;
+  height: calc(100vh - 136px);
+}
+.connect-wallet .center {
+  display: grid;
+  place-items: center;
+}
