@@ -14,7 +14,7 @@ state persistent:
     nextClaims Map[Address]I64
 
 const CLAIM_AMOUNT U64 = 10000
-const CLAIM_INTERVAL I64 = 3600  // every 1 hour
+const CLAIM_INTERVAL I64 = 60  // every 1 hour
 
 endpoint deployer Init!(name String,symbol String, decimals U64,totalSupply U64):
     mutate name -> SampleLogic.State.name

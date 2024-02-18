@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { truncateStr } from "../utils/truncateStr";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ updateWallet, showConnectModal, wallet }) => {
+const Navbar = ({
+  updateWallet,
+  showConnectModal,
+  wallet,
+  tokenDetails,
+  tokenBalance,
+}) => {
   const [toggleValue, setToggle] = useState(false);
 
   const navRef = useRef(null);
@@ -56,6 +62,11 @@ const Navbar = ({ updateWallet, showConnectModal, wallet }) => {
         >
           Built on MOI
         </a>
+        {wallet && (
+          <button className="btn">
+            {tokenBalance} {tokenDetails.symbol}
+          </button>
+        )}
         <button
           className="connect-button"
           onClick={wallet ? () => updateWallet() : () => showConnectModal(true)}
