@@ -1,7 +1,9 @@
 import { VoyageProvider, Wallet, getLogicDriver } from "js-moi-sdk";
 
+// Always keep your LOGIC_ID updated
+const LOGIC_ID = "paste your LOGIC_ID";
+
 const provider = new VoyageProvider("babylon");
-export const logicId = process.env.REACT_APP_LOGIC_ID;
 
 const constructBaseWallet = async () => {
   const wallet = new Wallet(provider);
@@ -20,7 +22,7 @@ const baseWallet = await constructBaseWallet();
 ///////////////////////
 
 const ClaimToken = async (wallet) => {
-  const logicDriver = await getLogicDriver(logicId, wallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, wallet);
   const ixResponse = await logicDriver.routines.Claim();
   return ixResponse.wait();
 };
@@ -30,31 +32,31 @@ const ClaimToken = async (wallet) => {
 ///////////////////////
 
 const GetTokenName = async () => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.Name();
 };
 const GetTokenBalanceOf = async (account) => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.BalanceOf(account);
 };
 const GetTokenClaimAmount = async () => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.ClaimAmount();
 };
 
 // returns a unix timestamp in seconds
 const GetNextClaim = async (account) => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.NextClaim(account);
 };
 const GetTokenDecimals = async () => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.Decimals();
 };
 
 // get the decimal value / precision of the token
 const GetTokenSymbol = async () => {
-  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  const logicDriver = await getLogicDriver(LOGIC_ID, baseWallet);
   return logicDriver.routines.Symbol();
 };
 
