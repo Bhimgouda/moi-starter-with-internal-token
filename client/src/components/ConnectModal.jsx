@@ -16,8 +16,8 @@ const ConnectModal = ({ isModalOpen, updateWallet, showConnectModal }) => {
         return setError("Incorrect mnemonic");
       }
 
-      const wallet = new Wallet(provider);
-      await wallet.fromMnemonic(mnemonic, account);
+      const wallet = await Wallet.fromMnemonic(mnemonic, account);
+      wallet.connect(provider);
       updateWallet(wallet);
 
       setError("");
@@ -45,7 +45,11 @@ const ConnectModal = ({ isModalOpen, updateWallet, showConnectModal }) => {
           style={{ border: "1px solid black" }}
           onChange={(e) => setMnemonic(e.target.value)}
         />
-        {error && <p style={{ color: "red", fontWeight: 700, textAlign: "center" }}>{error}</p>}
+        {error && (
+          <p style={{ color: "red", fontWeight: 700, textAlign: "center" }}>
+            {error}
+          </p>
+        )}
       </Modal>
     </>
   );

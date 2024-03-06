@@ -9,16 +9,16 @@
       "ptr": 0,
       "kind": "constant",
       "data": {
-        "type": "u64",
-        "value": "0x032710"
+        "type": "u256",
+        "value": "0x0303e8"
       }
     },
     {
       "ptr": 1,
       "kind": "constant",
       "data": {
-        "type": "i64",
-        "value": "0x033c"
+        "type": "i256",
+        "value": "0x03015180"
       }
     },
     {
@@ -80,17 +80,17 @@
     {
       "ptr": 9,
       "kind": "typedef",
-      "data": "map[address]u64"
+      "data": "map[address]u256"
     },
     {
       "ptr": 10,
       "kind": "typedef",
-      "data": "map[address]map[address]u64"
+      "data": "map[address]map[address]u256"
     },
     {
       "ptr": 11,
       "kind": "typedef",
-      "data": "map[address]i64"
+      "data": "map[address]i256"
     },
     {
       "ptr": 12,
@@ -111,27 +111,27 @@
           {
             "slot": 2,
             "label": "decimals",
-            "type": "u64"
+            "type": "u256"
           },
           {
             "slot": 3,
             "label": "totalSupply",
-            "type": "u64"
+            "type": "u256"
           },
           {
             "slot": 4,
             "label": "balanceOf",
-            "type": "map[address]u64"
+            "type": "map[address]u256"
           },
           {
             "slot": 5,
             "label": "allowances",
-            "type": "map[address]map[address]u64"
+            "type": "map[address]map[address]u256"
           },
           {
             "slot": 6,
             "label": "nextClaims",
-            "type": "map[address]i64"
+            "type": "map[address]i256"
           }
         ]
       }
@@ -160,12 +160,12 @@
           {
             "slot": 2,
             "label": "decimals",
-            "type": "u64"
+            "type": "u256"
           },
           {
             "slot": 3,
             "label": "totalSupply",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -244,7 +244,7 @@
           {
             "slot": 2,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -388,7 +388,7 @@
           {
             "slot": 1,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -482,7 +482,7 @@
           {
             "slot": 1,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -576,7 +576,7 @@
           {
             "slot": 1,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -637,7 +637,7 @@
           {
             "slot": 1,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -726,7 +726,7 @@
           {
             "slot": 2,
             "label": "value",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "returns": [],
@@ -882,16 +882,32 @@
             3,
             2,
             0,
+            10,
+            2,
+            82,
+            2,
+            0,
+            3,
+            10,
+            3,
+            13,
+            3,
+            20,
+            2,
+            81,
+            2,
+            3,
+            0,
             69,
             1,
             1,
-            3,
+            2,
             98,
             1,
             1,
             17,
             2,
-            17,
+            22,
             3,
             2,
             1,
@@ -948,16 +964,32 @@
             3,
             2,
             0,
-            17,
+            10,
             2,
-            1,
-            16,
+            82,
             2,
+            0,
+            3,
+            10,
+            3,
+            13,
+            3,
+            20,
             2,
-            101,
+            81,
             2,
             3,
+            0,
+            17,
+            3,
+            1,
+            16,
+            3,
+            3,
+            101,
             2,
+            2,
+            3,
             84,
             1,
             0,
@@ -1041,7 +1073,7 @@
           {
             "slot": 0,
             "label": "decimals",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "executes": {
@@ -1070,7 +1102,7 @@
           {
             "slot": 0,
             "label": "totalSupply",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "executes": {
@@ -1096,7 +1128,7 @@
           {
             "slot": 0,
             "label": "claimAmount",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "executes": {
@@ -1125,7 +1157,7 @@
           {
             "slot": 0,
             "label": "claimInterval",
-            "type": "i64"
+            "type": "i256"
           }
         ],
         "executes": {
@@ -1163,7 +1195,7 @@
           {
             "slot": 0,
             "label": "nextClaim",
-            "type": "i64"
+            "type": "i256"
           }
         ],
         "executes": {
@@ -1205,7 +1237,7 @@
           {
             "slot": 0,
             "label": "balance",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "executes": {
@@ -1252,7 +1284,7 @@
           {
             "slot": 0,
             "label": "allowance",
-            "type": "u64"
+            "type": "u256"
           }
         ],
         "executes": {

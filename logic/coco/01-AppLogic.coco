@@ -1,0 +1,21 @@
+coco SampleLogic
+
+state persistent:
+    // Internal Token state variables
+    name String
+    symbol String
+    decimals U256
+    totalSupply U256
+    balanceOf Map[Address]U256
+    allowances Map[Address]Map[Address]U256
+    nextClaims Map[Address]I256
+    // Add your logic variables here
+
+endpoint deployer Init!(name String, symbol String, decimals U256, totalSupply U256):
+    // For Token Initializations
+    mutate name -> SampleLogic.State.name
+    mutate symbol -> SampleLogic.State.symbol
+    mutate decimals -> SampleLogic.State.decimals
+    mint!(account: Address(Sender), value: totalSupply)
+
+

@@ -1,30 +1,16 @@
 coco SampleLogic
 
-// Token state, endpoints, functions are present
-// Time to add your app state variables, endpoints, and functions
+// Local constant variables 
+const CLAIM_AMOUNT U256 = 1000
+const CLAIM_INTERVAL I256 = 86400  // every 1 day
 
-state persistent:
-    // Token Variables
-    name String
-    symbol String
-    decimals U64
-    totalSupply U64
-    balanceOf Map[Address]U64
-    allowances Map[Address]Map[Address]U64
-    nextClaims Map[Address]I64
+////////////////////////
+// Internal Functions
+////////////////////////
 
-const CLAIM_AMOUNT U64 = 10000
-const CLAIM_INTERVAL I64 = 60  // every 1 hour
+// Note: functions can only be called internally within the logic
 
-endpoint deployer Init!(name String,symbol String, decimals U64,totalSupply U64):
-    mutate name -> SampleLogic.State.name
-    mutate symbol -> SampleLogic.State.symbol
-    mutate decimals -> SampleLogic.State.decimals
-
-    mint!(account: Address(Sender), value: totalSupply)
-    
-
-func transfer!(from Address, to Address, value U64):
+func transfer!(from Address, to Address, value U256):
     if from == Address(0):
         throw "Invalid Sender Address"
     if to == Address(0):
@@ -38,7 +24,7 @@ func transfer!(from Address, to Address, value U64):
         balanceOf[to] += value
 
 
-func mint!(account Address, value U64):
+func mint!(account Address, value U256):
     if account == Address(0):
         throw "Invalid Receiver Address"
 
@@ -49,7 +35,7 @@ func mint!(account Address, value U64):
         balanceOf[account] += value
 
 
-func burn!(account Address, value U64):
+func burn!(account Address, value U256):
     if account == Address(0):
         throw "Invalid Sender Address"
 
@@ -60,11 +46,17 @@ func burn!(account Address, value U64):
         balanceOf[account] -= value
 
 
-endpoint invokable Transfer!(to Address, value U64):
+////////////////////////
+// Mutate/Write Endpoints
+///////////////////////
+
+// Note: All Endpoints can only be called externally and not within the logic
+
+endpoint invokable Transfer!(to Address, value U256):
     transfer!(from: Address(Sender), to, value)
 
 
-endpoint invokable Approve!(spender Address, value U64):
+endpoint invokable Approve!(spender Address, value U256):
     if spender == Address(0):
         throw "Invalid Spender Address"
 
@@ -74,7 +66,7 @@ endpoint invokable Approve!(spender Address, value U64):
         allowances[owner][spender] = value
 
 
-endpoint invokable TransferFrom!(from Address, to Address, value U64):
+endpoint invokable TransferFrom!(from Address, to Address, value U256):
     var spender = Address(Sender)
     
     mutate allowances <- SampleLogic.State.allowances:
@@ -88,13 +80,13 @@ endpoint invokable TransferFrom!(from Address, to Address, value U64):
 endpoint invokable Claim!():
     var account = Address(Sender)
     observe nextClaims <- SampleLogic.State.nextClaims:
-        if nextClaims[account] > Env.Timestamp():
+        if nextClaims[account] > I256(Env.Timestamp()):
             throw "Next Claim at {nextClaims[address]}"
 
     mint!(account, value: CLAIM_AMOUNT)
 
     mutate nextClaims <- SampleLogic.State.nextClaims:
-        nextClaims[account] = Env.Timestamp() + CLAIM_INTERVAL
+        nextClaims[account] = I256(Env.Timestamp()) + CLAIM_INTERVAL
 
 
 ////////////////////////
@@ -107,35 +99,35 @@ endpoint invokable Name()->(name String):
 endpoint invokable Symbol()->(symbol String):
     observe symbol <- SampleLogic.State.symbol
 
-endpoint invokable Decimals()->(decimals U64):
+endpoint invokable Decimals()->(decimals U256):
     observe decimals <- SampleLogic.State.decimals
 
-endpoint invokable TotalSupply()->(totalSupply U64):
+endpoint invokable TotalSupply()->(totalSupply U256):
     observe totalSupply <- SampleLogic.State.totalSupply
 
-endpoint invokable ClaimAmount()->(claimAmount U64):
+endpoint invokable ClaimAmount()->(claimAmount U256):
     yield claimAmount CLAIM_AMOUNT
 
-endpoint invokable ClaimInterval()->(claimInterval I64):
+endpoint invokable ClaimInterval()->(claimInterval I256):
     yield claimInterval CLAIM_INTERVAL
 
-endpoint invokable NextClaim(account Address)->(nextClaim I64):
+endpoint invokable NextClaim(account Address)->(nextClaim I256):
     observe nextClaims <- SampleLogic.State.nextClaims:
         yield nextClaim nextClaims[account]
 
-endpoint invokable BalanceOf(account Address)->(balance U64):
+endpoint invokable BalanceOf(account Address)->(balance U256):
     observe balanceOf <- SampleLogic.State.balanceOf:
         yield balance balanceOf[account]
 
-endpoint invokable Allowances(owner Address, spender Address)->(allowance U64):
+endpoint invokable Allowances(owner Address, spender Address)->(allowance U256):
     observe allowances <- SampleLogic.State.allowances:
         yield allowance allowances[owner][spender]
- 
 
-
-
-
-
-
-
-
+////////////////////////
+// Note: This file of SampleLogic should be strictly used only
+// for Internal Token related logic but not the token state variables. 
+// As the logic module can only declare state persistent once
+// The global module name is still SampleLogic and will be seen
+// a one logic ... this implementation of splitting token logic and app logic
+// is only for modularity
+////////////////////////
