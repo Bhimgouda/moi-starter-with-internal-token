@@ -2,7 +2,8 @@ import { VoyageProvider, getLogicDriver } from "js-moi-sdk";
 
 // Always keep your logicId updated
 const provider = new VoyageProvider("babylon");
-const logicId = "your logic id here";
+//Your logic Id here
+const logicId = "0x0800002ed1e7ac81629bc78a67b80b31a58574078d139a0d1ea3f254eeaa23bee78731";
 
 ////////////////////////
 // Mutate/Write Calls
