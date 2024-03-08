@@ -1,7 +1,6 @@
-import { Card, Skeleton, message } from "antd";
-import { getLogicDriver } from "js-moi-sdk";
-import React, { useEffect, useRef, useState } from "react";
-import logic, { logicId } from "../interface/logic";
+import { Card, Skeleton} from "antd";
+import { useEffect, useState } from "react";
+import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 import Loader from "../components/Loader";
 import { calculateRemainingTime } from "../utils/CalculateTimer";
